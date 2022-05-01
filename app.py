@@ -1,7 +1,9 @@
 from user import User
 from database import Database
+import cred
 
-Database.initialise()
+
+Database.initialise(user=cred.login, password=cred.passwd, database='learning', host='localhost')
 
 my_user = User('kszksz@mail.oc', 'halo', 'tsz', None)
 my_user.save_to_db()

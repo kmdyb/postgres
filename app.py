@@ -1,5 +1,7 @@
 from user import User
+from database import Database
 
+Database.initialise()
 
 my_user = User('kszksz@mail.oc', 'halo', 'tsz', None)
 my_user.save_to_db()

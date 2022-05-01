@@ -1,5 +1,4 @@
-import cred
-import psycopg2
+from database import ConnectionFromPool
 
 
 class User:
@@ -13,14 +12,14 @@ class User:
         return "<User {}>".format(self.email)
 
     def save_to_db(self):
-        with psycopg2.connect(user=cred.login, password=cred.passwd, database='learning', host='localhost') as connection:
+        with ConnectionFromPool() as connection:
             with connection.cursor() as cursor:
                 cursor.execute('INSERT INTO users (email, first_name, last_name) VALUES (%s, %s, %s)',
                                (self.email, self.first_name, self.last_name))
 
     @classmethod
     def load_from_db_by_email(cls, email):
-        with psycopg2.connect(user=cred.login, password=cred.passwd, database='learning', host='localhost') as connection:
+        with ConnectionFromPool() as connection:
             with connection.cursor() as cursor:
                 cursor.execute('SELECT * FROM users WHERE email=%s', (email,))
                 user_data = cursor.fetchone()

@@ -1,6 +1,10 @@
 from user import User
 
 
-my_user = User.load_from_db_by_email('user@mail.oc')
+my_user = User('kszksz@mail.oc', 'halo', 'tsz', None)
+my_user.save_to_db()
 
-print(my_user)
+user_from_db = User.load_from_db_by_email('adam@mail.oc')
+print(user_from_db)
+
+my_user.save_to_db()
